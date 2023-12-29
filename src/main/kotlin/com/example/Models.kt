@@ -19,9 +19,17 @@ data class VideoGamePublisherApiModel(
 )
 
 fun VideoGame.toApiModel(): VideoGameApiModel {
-    TODO("Not yet implemented")
+    return VideoGameApiModel(
+        name = this.name,
+        genre = this.genre,
+        publisher = this.publisher.toApiModel(),
+        sales = this.sales
+    )
 }
 
 fun VideoGamePublisher.toApiModel(): VideoGamePublisherApiModel {
-    TODO("Not yet implemented")
+    return VideoGamePublisherApiModel(
+        name = this.name,
+        location = this.location
+    )
 }

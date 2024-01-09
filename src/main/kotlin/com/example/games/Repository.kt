@@ -6,7 +6,8 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class Repository {
     init {
-        Database.connect("jdbc:mysql://localhost:3306/ktor_orm", user = "root")
+        val databaseConfig = DatabaseConfig { keepLoadedReferencesOutOfTransaction = true }
+        Database.connect("jdbc:mysql://localhost:3306/ktor_orm", user = "root", databaseConfig = databaseConfig)
         transaction {
             SchemaUtils.create(VideoGames, VideoGamePublishers)
         }
@@ -28,7 +29,7 @@ class Repository {
      * JOIN t_video_game_publisher ON t_video_game.publisher_id = t_video_game_publisher.id;
      */
     fun findAllGames(): List<VideoGame> = transaction {
-        VideoGame.all().toList()
+        VideoGame.all().with(VideoGame::publisher).toList()
     }
 
     /**

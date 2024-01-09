@@ -3,6 +3,8 @@ val kotlin_version: String by project
 val logback_version: String by project
 val kotlin_logging_version: String by project
 val kotlinx_datetime_version: String by project
+val exposed_version: String by project
+val mysql_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.21"
@@ -32,6 +34,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:$kotlinx_datetime_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.github.oshai:kotlin-logging-jvm:$kotlin_logging_version")
+
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    implementation("mysql:mysql-connector-java:$mysql_version")
 
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
